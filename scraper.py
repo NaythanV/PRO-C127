@@ -18,36 +18,37 @@ scraped_data = []
 # Define Exoplanet Data Scrapping Method
 def scrape():
 
-bright_star_table = soup.find("table", attrs= {"class", "wikitable"})
-table_body = bright_star_table.find("tbody")
-table_rows = table_body.fand_all('tr')
+    soup = BeautifulSoup(browser.page_source, "html.parser")
+    bright_star_table = soup.find("table", attrs= {"class", "wikitable"})
+    table_body = bright_star_table.find("tbody")
+    table_rows = table_body.find_all('tr')
 
-for row in table_rows:
-    table_cols = row.fand_all ('td')
-    print(table_cols)
+    for row in table_rows:
+        table_cols = row.find_all('td')
+        print(table_cols)
 
-    temp_list = []
+        temp_list = []
 
-    for col_data in table_cols:
-        #print(col_data.text)
+        for col_data in table_cols:
+            #print(col_data.text)
 
-        data = col_data.text.strip()
-        #print(data)
+            data = col_data.text.strip()
+            #print(data)
 
-        temp_list.append(data)
+            temp_list.append(data)
 
-stars_data = []
+    stars_data = []
 
-for i in range(0,len(scraped_data)):
+    for i in range(0,len(scraped_data)):
 
-    Star_names = scraped_data[i][1]
-    Distance = scraped_data[i][3]
-    Mass = scraped_data[i][5]
-    Radius = scraped_data[i][6]
-    Lum = scraped_data[i][7]
+        Star_names = scraped_data[i][1]
+        Distance = scraped_data[i][3]
+        Mass = scraped_data[i][5]
+        Radius = scraped_data[i][6]
+        Lum = scraped_data[i][7]
 
-    required_data = [Star_names, Distance, Mass, Radius, Lum]
-    stars_data.append(required_data)
+        required_data = [Star_names, Distance, Mass, Radius, Lum]
+        stars_data.append(required_data)
         
 # Calling Method    
 scrape()
